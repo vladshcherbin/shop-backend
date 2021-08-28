@@ -9,9 +9,9 @@ provider:
   region: eu-west-1
 
 functions:
-  test:
-    handler: handler.test
+  getProductsList:
+    handler: handler.productsList
     events:
       - http:
-          path: test
+          path: products
           method: get

@@ -1,4 +1,13 @@
-module.exports.test = async () => ({
+module.exports.productsList = async () => ({
   statusCode: 200,
-  body: 'hey'
+  body: JSON.stringify([
+    {
+      id: 1,
+      title: 'product 1'
+    },
+    {
+      id: 2,
+      title: 'product 1'
+    }
+  ])
 })
