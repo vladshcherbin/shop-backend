@@ -11,3 +11,7 @@ provider:
 functions:
   test:
     handler: handler.test
+    events:
+      - http:
+          path: test
+          method: get
