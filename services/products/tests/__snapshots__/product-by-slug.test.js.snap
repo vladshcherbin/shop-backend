@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Correct product is returned 1`] = `"{\\"product\\":{\\"id\\":2,\\"title\\":\\"Basic top\\",\\"slug\\":\\"basic-top\\"}}"`;
+exports[`Correct product is returned 1`] = `"{\\"product\\":{\\"id\\":2,\\"title\\":\\"Basic top\\",\\"description\\":\\"round neck, wide straps\\",\\"image\\":\\"https://www.sinsay.com/media/catalog/product/cache/850/a4e40ebdc3e371adff845072e1c73f37/2/6/2628F-18X-001-1_3.jpg\\",\\"slug\\":\\"basic-top\\",\\"price\\":9.99,\\"count\\":6}}"`;
 
 exports[`Not found error if product with slug doesn't exist 1`] = `"{\\"message\\":\\"Product not found\\"}"`;
 
