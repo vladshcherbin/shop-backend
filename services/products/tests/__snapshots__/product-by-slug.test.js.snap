@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Correct product is returned 1`] = `"{\\"product\\":{\\"id\\":2,\\"title\\":\\"Basic top\\",\\"slug\\":\\"basic-top\\"}}"`;
+
+exports[`Not found error if product with slug doesn't exist 1`] = `"{\\"message\\":\\"Product not found\\"}"`;
+
+exports[`Not found error if slug is empty 1`] = `"{\\"message\\":\\"Product not found\\"}"`;
+
+exports[`Not found error if slug is missing 1`] = `"{\\"message\\":\\"Product not found\\"}"`;
