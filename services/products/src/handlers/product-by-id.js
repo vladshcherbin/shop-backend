@@ -1,6 +1,6 @@
 import products from '../data/products'
 
-export default async function productById(event) {
+export async function handler(event) {
   const { id } = event.pathParameters
 
   return {
