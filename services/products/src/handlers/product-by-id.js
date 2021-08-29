@@ -1,9 +1,9 @@
 import { findById } from '../data/products'
 
 export async function handler(event) {
-  const foundProduct = await findById(Number(event?.pathParameters?.id))
+  const product = await findById(Number(event?.pathParameters?.id))
 
-  if (!foundProduct) {
+  if (!product) {
     return {
       statusCode: 404,
       headers: {
@@ -18,6 +18,6 @@ export async function handler(event) {
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({ product: foundProduct })
+    body: JSON.stringify({ product })
   }
 }
