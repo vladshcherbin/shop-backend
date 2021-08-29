@@ -1,7 +1,8 @@
 {
   "name": "products",
   "scripts": {
-    "deploy": "sls deploy"
+    "deploy": "sls deploy",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "devDependencies": {
     "jest": "^27.1.0",
@@ -9,5 +10,6 @@
     "rollup-plugin-terser": "^7.0.2",
     "serverless-rollup-plugin": "^2.3.0"
   },
+  "type": "module",
   "private": true
 }
