@@ -1,33 +1,33 @@
-import { handler } from '../src/handlers/product-by-slug'
+import { handler } from '../src/handlers/product-by-id'
 
 test('Correct product is returned', async () => {
   const response = await handler({
-    pathParameters: { slug: 'basic-top' }
+    pathParameters: { id: 2 }
   })
 
   expect(response.statusCode).toBe(200)
   expect(response.body).toMatchSnapshot()
 })
 
-test('Not found error if slug is missing', async () => {
+test('Not found error if "id" is missing', async () => {
   const response = await handler()
 
   expect(response.statusCode).toBe(404)
   expect(response.body).toMatchSnapshot()
 })
 
-test('Not found error if slug is empty', async () => {
+test('Not found error if "id" is empty', async () => {
   const response = await handler({
-    pathParameters: { slug: '' }
+    pathParameters: { id: '' }
   })
 
   expect(response.statusCode).toBe(404)
   expect(response.body).toMatchSnapshot()
 })
 
-test('Not found error if product with slug doesn\'t exist', async () => {
+test('Not found error if product with "id" doesn\'t exist', async () => {
   const response = await handler({
-    pathParameters: { slug: 'missing' }
+    pathParameters: { id: 'missing' }
   })
 
   expect(response.statusCode).toBe(404)

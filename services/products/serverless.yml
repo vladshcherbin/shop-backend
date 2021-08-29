@@ -27,14 +27,14 @@ functions:
           path: products
           method: get
           cors: true
-  productBySlug:
-    handler: src/handlers/product-by-slug.handler
+  productById:
+    handler: src/handlers/product-by-id.handler
     events:
       - http:
-          path: products/{slug}
+          path: products/{id}
           method: get
           cors: true
           request:
             parameters:
               paths:
-                slug: true
+                id: true
