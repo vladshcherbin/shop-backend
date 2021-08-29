@@ -2,6 +2,17 @@ service: products
 
 frameworkVersion: '2'
 
+plugins:
+  - serverless-rollup-plugin
+
+package:
+  individually: true
+
+custom:
+  rollup:
+    config: ./rollup.config.js
+    installCommand: yarn add
+
 provider:
   name: aws
   runtime: nodejs14.x
