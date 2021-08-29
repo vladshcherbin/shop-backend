@@ -1,4 +1,4 @@
-export async function productsList() {
+export default async function productsList() {
   return {
     statusCode: 200,
     body: JSON.stringify([
@@ -8,7 +8,7 @@ export async function productsList() {
       },
       {
         id: 2,
-        title: 'product 1'
+        title: 'product 2'
       }
     ])
   }

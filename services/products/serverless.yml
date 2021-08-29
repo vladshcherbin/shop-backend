@@ -21,7 +21,7 @@ provider:
 
 functions:
   getProductsList:
-    handler: handler.productsList
+    handler: src/handler.productsList
     events:
       - http:
           path: products
