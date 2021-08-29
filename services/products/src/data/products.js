@@ -1,4 +1,4 @@
-export default [
+const products = [
   {
     id: 1,
     title: 'High waist super skinny jeans',
@@ -30,3 +30,11 @@ export default [
     slug: 'eco-aware-quilted-jacket-with-hood'
   }
 ]
+
+export async function findAll() {
+  return products
+}
+
+export async function findBySlug(slug) {
+  return products.find((product) => product.slug === slug)
+}

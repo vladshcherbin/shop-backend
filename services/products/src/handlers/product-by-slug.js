@@ -1,8 +1,8 @@
-import products from '../data/products'
+import { findBySlug } from '../data/products'
 
 export async function handler(event) {
   const { slug } = event.pathParameters
-  const foundProduct = products.find((product) => product.slug === slug)
+  const foundProduct = await findBySlug(slug)
 
   if (!foundProduct) {
     return {
