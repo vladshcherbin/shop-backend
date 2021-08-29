@@ -26,3 +26,13 @@ functions:
       - http:
           path: products
           method: get
+  productById:
+    handler: src/handler.productById
+    events:
+      - http:
+          path: products/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
