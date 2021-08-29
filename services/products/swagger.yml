@@ -1,0 +1,97 @@
+openapi: 3.0.0
+
+info:
+  title: 'Products api'
+  version: 1.0.0
+
+servers:
+  - url: https://pz4y7opa60.execute-api.eu-west-1.amazonaws.com/dev
+    description: Development server
+
+paths:
+  /products:
+    get:
+      tags:
+        - Products
+      responses:
+        200:
+          description: Returns all products
+          content:
+            application/json:
+              schema:
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Product"
+
+  /products/{id}:
+    get:
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Product identifier
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Returns single product
+          content:
+            application/json:
+              schema:
+                properties:
+                  product:
+                    $ref: "#/components/schemas/Product"
+                default:
+                  id: 123
+        404:
+          $ref: "#/components/responses/NotFound"
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+        price:
+          type: number
+        count:
+          type: integer
+      required:
+        - id
+        - title
+        - description
+        - image
+        - price
+        - count
+      example:
+        id: 1
+        title: 'Skinny jeans'
+        description: 'high waist'
+        image: 'https://example.com/test.jpg'
+        price: 49.99
+        count: 4
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+  responses:
+    NotFound:
+      description: Specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
