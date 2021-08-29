@@ -46,7 +46,7 @@ paths:
                   product:
                     $ref: "#/components/schemas/Product"
                 default:
-                  id: 123
+                  id: 1
         404:
           $ref: "#/components/responses/NotFound"
 
