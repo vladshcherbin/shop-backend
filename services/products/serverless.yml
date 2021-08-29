@@ -26,13 +26,13 @@ functions:
       - http:
           path: products
           method: get
-  productById:
-    handler: src/handlers/product-by-id.handler
+  productBySlug:
+    handler: src/handlers/product-by-slug.handler
     events:
       - http:
-          path: products/{id}
+          path: products/{slug}
           method: get
           request:
             parameters:
               paths:
-                id: true
+                slug: true
