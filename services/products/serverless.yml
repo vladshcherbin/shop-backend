@@ -20,7 +20,7 @@ provider:
   region: eu-west-1
 
 functions:
-  getProductsList:
+  productsList:
     handler: src/handler.productsList
     events:
       - http:
