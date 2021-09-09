@@ -1,5 +1,6 @@
 import { findById } from '../data/products'
 
+// TODO add db
 export async function handler(event) {
   const product = await findById(Number(event?.pathParameters?.id))
 
