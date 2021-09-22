@@ -4,6 +4,12 @@
     "deploy": "sls deploy",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
+  "dependencies": {
+    "knex": "^0.95.11",
+    "pg": "^8.7.1",
+    "pino": "^7.0.0-rc.5",
+    "yup": "^0.32.9"
+  },
   "devDependencies": {
     "jest": "^27.1.0",
     "rollup": "^2.56.3",
