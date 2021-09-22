@@ -1,0 +1,2 @@
+- update swagger with create product
+- update tests
