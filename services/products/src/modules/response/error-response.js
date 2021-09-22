@@ -6,7 +6,7 @@ const headers = {
 }
 
 export default function errorResponse(error) {
-  logger.error('Internal error', error)
+  logger.error({ error }, 'Internal error')
 
   if (error instanceof ValidationError) {
     return {
