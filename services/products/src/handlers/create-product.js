@@ -22,7 +22,7 @@ export async function handler(event) {
   try {
     logger.info({ event }, 'create product')
 
-    const data = event.body
+    const data = JSON.parse(event.body)
     const schema = object({
       title: string().required().min(3),
       description: string(),
