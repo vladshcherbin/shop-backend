@@ -59,7 +59,7 @@ components:
           type: string
         description:
           type: string
-        image:
+        image_url:
           type: string
         price:
           type: number
@@ -69,14 +69,14 @@ components:
         - id
         - title
         - description
-        - image
+        - image_url
         - price
         - count
       example:
         id: 1
         title: 'Skinny jeans'
         description: 'high waist'
-        image: 'https://example.com/test.jpg'
+        image_url: 'https://example.com/test.jpg'
         price: 49.99
         count: 4
     Error:
