@@ -1,5 +1,5 @@
 import logger from '../logger'
-import ValidationError from '../validation/ValidationError'
+import { ValidationError } from '../validation'
 
 const headers = {
   'Access-Control-Allow-Origin': '*'

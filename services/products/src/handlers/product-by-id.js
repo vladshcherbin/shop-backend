@@ -1,8 +1,6 @@
 import knexConnection from 'knex'
 import logger from '../modules/logger'
-import errorResponse from '../modules/response/error-response'
-import notFoundResponse from '../modules/response/not-found-response'
-import successfulResponse from '../modules/response/successful-response'
+import { errorResponse, notFoundResponse, successfulResponse } from '../modules/response'
 
 const knex = knexConnection({
   client: 'pg',

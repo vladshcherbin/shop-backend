@@ -1,9 +1,8 @@
 import knexConnection from 'knex'
 import { number, object, string } from 'yup'
 import logger from '../modules/logger'
-import errorResponse from '../modules/response/error-response'
-import successfulResponse from '../modules/response/successful-response'
-import validate from '../modules/validation/validation'
+import { errorResponse, successfulResponse } from '../modules/response'
+import { validate } from '../modules/validation'
 
 const knex = knexConnection({
   client: 'pg',
