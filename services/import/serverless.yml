@@ -1,0 +1,26 @@
+service: import
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-rollup-plugin
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: eu-west-1
+
+functions:
+  importProductsFile:
+    handler: src/handlers/import-products-file.handler
+    events:
+      - http:
+          path: import
+          method: get
+          cors: true
+
+custom:
+  rollup:
+    config: ./rollup.config.js
+    installCommand: yarn add
