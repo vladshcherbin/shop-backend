@@ -11,8 +11,10 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.5",
     "jest": "^27.1.0",
     "rollup": "^2.56.3",
+    "rollup-plugin-auto-external": "^3.0.0-alpha.0",
     "rollup-plugin-terser": "^7.0.2",
     "serverless-rollup-plugin": "^2.3.0"
   },
