@@ -2,24 +2,31 @@ service: products
 
 frameworkVersion: '2'
 
+useDotenv: true
+
 plugins:
   - serverless-rollup-plugin
 
 package:
   individually: true
 
-custom:
-  rollup:
-    config: ./rollup.config.js
-    installCommand: yarn add
-
 provider:
   name: aws
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   region: eu-west-1
+  environment:
+    DB_HOST: ${env:DB_HOST}
+    DB_PORT: ${env:DB_PORT}
+    DB_USER: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_DATABASE: ${env:DB_DATABASE}
 
 functions:
+  migration:
+    handler: src/handlers/migration.handler
+    copyFiles:
+      - migrations
   productsList:
     handler: src/handlers/products-list.handler
     events:
@@ -38,3 +45,21 @@ functions:
             parameters:
               paths:
                 id: true
+  createProduct:
+    handler: src/handlers/create-product.handler
+    dependencies:
+      - yup
+    events:
+      - http:
+          path: products/create
+          method: post
+          cors: true
+
+custom:
+  rollup:
+    config: ./rollup.config.js
+    installCommand: yarn add
+    dependencies:
+      - knex
+      - pg
+      - pino
