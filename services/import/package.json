@@ -3,6 +3,11 @@
   "scripts": {
     "deploy": "sls deploy"
   },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.33.0",
+    "@aws-sdk/s3-request-presigner": "^3.33.0",
+    "pino": "^7.0.0-rc.6"
+  },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.5",
     "rollup": "^2.57.0",
