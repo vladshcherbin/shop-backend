@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error if name query parameter is missing 1`] = `"{\\"message\\":\\"Internal server error\\"}"`;
+
+exports[`Products file signed url is generated 1`] = `"{\\"url\\":\\"mocked-url\\"}"`;
