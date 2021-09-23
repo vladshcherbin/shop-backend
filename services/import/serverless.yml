@@ -22,10 +22,23 @@ provider:
       statements:
         - Effect: Allow
           Action:
+            - 's3:GetObject'
             - 's3:PutObject'
           Resource: 'arn:aws:s3:::${env:BUCKET_NAME}/*'
 
 functions:
+  importFileParser:
+    handler: src/handlers/import-file-parser.handler
+    events:
+      - s3:
+          bucket: ${env:BUCKET_NAME}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaded/
+            - suffix: .csv
+          existing: true
+    dependencies:
+      - csv-parser
   importProductsFile:
     handler: src/handlers/import-products-file.handler
     events:
@@ -38,11 +51,12 @@ functions:
               querystrings:
                 name: true
     dependencies:
-      - '@aws-sdk/client-s3'
       - '@aws-sdk/s3-request-presigner'
-      - pino
 
 custom:
   rollup:
     config: ./rollup.config.js
     installCommand: yarn add
+    dependencies:
+      - '@aws-sdk/client-s3'
+      - pino

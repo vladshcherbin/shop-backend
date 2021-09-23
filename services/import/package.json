@@ -6,6 +6,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.33.0",
     "@aws-sdk/s3-request-presigner": "^3.33.0",
+    "csv-parser": "^3.0.0",
     "pino": "^7.0.0-rc.6"
   },
   "devDependencies": {
