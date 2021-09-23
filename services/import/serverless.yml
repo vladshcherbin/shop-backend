@@ -17,6 +17,13 @@ provider:
   region: eu-west-1
   environment:
     BUCKET_NAME: ${env:BUCKET_NAME}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 's3:PutObject'
+          Resource: 'arn:aws:s3:::${env:BUCKET_NAME}/*'
 
 functions:
   importProductsFile:
