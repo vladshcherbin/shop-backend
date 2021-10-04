@@ -5,6 +5,7 @@ frameworkVersion: '2'
 useDotenv: true
 
 plugins:
+  - serverless-lift
   - serverless-rollup-plugin
 
 package:
@@ -21,6 +22,13 @@ provider:
     DB_USER: ${env:DB_USER}
     DB_PASSWORD: ${env:DB_PASSWORD}
     DB_DATABASE: ${env:DB_DATABASE}
+
+constructs:
+  catalog-items-queue:
+    type: queue
+    worker:
+      handler: src/handlers/catalog-batch-process.handler
+    batchSize: 5
 
 functions:
   migration:
@@ -54,6 +62,13 @@ functions:
           path: products/create
           method: post
           cors: true
+
+resources:
+  Outputs:
+    CatalogItemsQueueArn:
+      Value: ${construct:catalog-items-queue.queueArn}
+    CatalogItemsQueueUrl:
+      Value: ${construct:catalog-items-queue.queueUrl}
 
 custom:
   rollup:
