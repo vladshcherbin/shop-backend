@@ -1,14 +1,18 @@
 import csv from 'csv-parser'
 import logger from '../logger'
 
-export default function logFile(readStream) {
+export default function processFile(readStream, processFunction) {
   return new Promise((resolve, reject) => {
     logger.info('parsing contents')
 
     readStream
       .pipe(csv())
-      .on('data', (row) => {
-        logger.info({ row })
+      .on('data', async (row) => {
+        try {
+          await processFunction(row)
+        } catch (error) {
+          logger.error({ error }, 'row process error')
+        }
       })
       .on('end', () => {
         logger.info('done parsing')
