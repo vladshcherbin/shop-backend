@@ -22,12 +22,24 @@ provider:
     DB_USER: ${env:DB_USER}
     DB_PASSWORD: ${env:DB_PASSWORD}
     DB_DATABASE: ${env:DB_DATABASE}
+    SNS_ARN:
+      Ref: createProductTopic
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 'sns:*'
+          Resource:
+            Ref: createProductTopic
 
 constructs:
   catalog-items-queue:
     type: queue
     worker:
       handler: src/handlers/catalog-batch-process.handler
+      dependencies:
+        - '@aws-sdk/client-sns'
     batchSize: 5
 
 functions:
@@ -64,6 +76,18 @@ functions:
           cors: true
 
 resources:
+  Resources:
+    createProductTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: create-product-topic
+    createProductSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Protocol: email
+        Endpoint: ${env:EMAIL}
+        TopicArn:
+          Ref: createProductTopic
   Outputs:
     CatalogItemsQueueArn:
       Value: ${construct:catalog-items-queue.queueArn}

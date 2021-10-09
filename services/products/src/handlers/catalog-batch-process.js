@@ -1,6 +1,6 @@
+import { PublishCommand, SNSClient } from '@aws-sdk/client-sns'
 import knexConnection from 'knex'
 import logger from '../modules/logger'
-import { validate } from '../modules/validation'
 
 const knex = knexConnection({
   client: 'pg',
@@ -58,6 +58,16 @@ export async function handler(event) {
 
         return insertedProducts
       })
+
+      logger.info('sending notification email')
+
+      const snsClient = new SNSClient({ region: 'eu-west-1' })
+
+      await snsClient.send(new PublishCommand({
+        TopicArn: process.env.SNS_ARN,
+        Subject: 'New products added',
+        Message: JSON.stringify(products)
+      }))
     }
 
     logger.info('catalog batch process end')

@@ -5,6 +5,7 @@
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "dependencies": {
+    "@aws-sdk/client-sns": "^3.35.0",
     "knex": "^0.95.11",
     "pg": "^8.7.1",
     "pino": "^7.0.0-rc.5",
