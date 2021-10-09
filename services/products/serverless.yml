@@ -81,13 +81,26 @@ resources:
       Type: AWS::SNS::Topic
       Properties:
         TopicName: create-product-topic
-    createProductSubscription:
+    createProductSubscriptionSingle:
       Type: AWS::SNS::Subscription
       Properties:
         Protocol: email
-        Endpoint: ${env:EMAIL}
+        Endpoint: ${env:EMAIL_PRIMARY}
         TopicArn:
           Ref: createProductTopic
+        FilterPolicy:
+          count:
+            - single
+    createProductSubscriptionMany:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Protocol: email
+        Endpoint: ${env:EMAIL_SECONDARY}
+        TopicArn:
+          Ref: createProductTopic
+        FilterPolicy:
+          count:
+            - many
   Outputs:
     CatalogItemsQueueArn:
       Value: ${construct:catalog-items-queue.queueArn}

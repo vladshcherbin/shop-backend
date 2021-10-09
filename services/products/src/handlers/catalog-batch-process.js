@@ -66,7 +66,13 @@ export async function handler(event) {
       await snsClient.send(new PublishCommand({
         TopicArn: process.env.SNS_ARN,
         Subject: 'New products added',
-        Message: JSON.stringify(products)
+        Message: JSON.stringify(products),
+        MessageAttributes: {
+          count: {
+            DataType: 'String',
+            StringValue: products.length > 1 ? 'many' : 'single'
+          }
+        }
       }))
     }
 
