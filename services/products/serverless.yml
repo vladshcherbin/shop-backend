@@ -5,6 +5,7 @@ frameworkVersion: '2'
 useDotenv: true
 
 plugins:
+  - serverless-lift
   - serverless-rollup-plugin
 
 package:
@@ -21,6 +22,25 @@ provider:
     DB_USER: ${env:DB_USER}
     DB_PASSWORD: ${env:DB_PASSWORD}
     DB_DATABASE: ${env:DB_DATABASE}
+    SNS_ARN:
+      Ref: createProductTopic
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 'sns:*'
+          Resource:
+            Ref: createProductTopic
+
+constructs:
+  catalog-items-queue:
+    type: queue
+    worker:
+      handler: src/handlers/catalog-batch-process.handler
+      dependencies:
+        - '@aws-sdk/client-sns'
+    batchSize: 5
 
 functions:
   migration:
@@ -54,6 +74,38 @@ functions:
           path: products/create
           method: post
           cors: true
+
+resources:
+  Resources:
+    createProductTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: create-product-topic
+    createProductSubscriptionSingle:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Protocol: email
+        Endpoint: ${env:EMAIL_PRIMARY}
+        TopicArn:
+          Ref: createProductTopic
+        FilterPolicy:
+          count:
+            - single
+    createProductSubscriptionMany:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Protocol: email
+        Endpoint: ${env:EMAIL_SECONDARY}
+        TopicArn:
+          Ref: createProductTopic
+        FilterPolicy:
+          count:
+            - many
+  Outputs:
+    CatalogItemsQueueArn:
+      Value: ${construct:catalog-items-queue.queueArn}
+    CatalogItemsQueueUrl:
+      Value: ${construct:catalog-items-queue.queueUrl}
 
 custom:
   rollup:

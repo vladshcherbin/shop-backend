@@ -27,6 +27,10 @@ provider:
             - 's3:GetObject'
             - 's3:PutObject'
           Resource: 'arn:aws:s3:::${env:BUCKET_NAME}/*'
+        - Effect: Allow
+          Action:
+            - 'sqs:SendMessage'
+          Resource: ${cf:products-${sls:stage}.CatalogItemsQueueArn}
 
 functions:
   importFileParser:
@@ -40,7 +44,10 @@ functions:
             - suffix: .csv
           existing: true
     dependencies:
+      - '@aws-sdk/client-sqs'
       - csv-parser
+    environment:
+      QUEUE_URL: ${cf:products-${sls:stage}.CatalogItemsQueueUrl}
   importProductsFile:
     handler: src/handlers/import-products-file.handler
     events:
