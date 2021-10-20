@@ -59,6 +59,10 @@ functions:
             parameters:
               querystrings:
                 name: true
+          authorizer:
+            arn: ${cf:authorization-${sls:stage}.BasicAuthorizerLambdaFunctionQualifiedArn}
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
     dependencies:
       - '@aws-sdk/s3-request-presigner'
 
